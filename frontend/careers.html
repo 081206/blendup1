@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Careers - FindYourMatch</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .careers-section {
+      max-width: 900px;
+      margin: 80px auto 50px;
+      padding: 0 20px;
+      color: #333;
+      line-height: 1.8;
+    }
+    
+    .job-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+      border: 1px solid #eee;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .job-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+    
+    .job-card h4 {
+      color: #FF4B91;
+      margin-top: 0;
+      font-size: 1.3rem;
+    }
+    
+    .job-meta {
+      display: flex;
+      gap: 15px;
+      margin: 10px 0;
+      color: #666;
+      font-size: 0.9rem;
+    }
+    
+    .job-meta span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .apply-form {
+      background: #f9f9f9;
+      padding: 30px;
+      border-radius: 8px;
+      margin: 40px 0;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    
+    .form-control:focus {
+      border-color: #FF4B91;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(255, 75, 145, 0.2);
+    }
+    
+    .btn-apply {
+      background: #FF4B91;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: background 0.3s ease;
+    }
+    
+    .btn-apply:hover {
+      background: #e0417d;
+    }
+    
+    .internship-section {
+      background: #f0f7ff;
+      padding: 30px;
+      border-radius: 8px;
+      margin: 40px 0;
+    }
+    
+    .internship-role {
+      display: flex;
+      align-items: center;
+      margin: 10px 0;
+      padding: 10px;
+      background: white;
+      border-radius: 6px;
+      transition: transform 0.2s ease;
+    }
+    
+    .internship-role:hover {
+      transform: translateX(5px);
+    }
+    
+    .internship-role i {
+      margin-right: 15px;
+      font-size: 1.2rem;
+      color: #FF4B91;
+    }
+    
+    .careers-section h2 {
+      color: #FF4B91;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .careers-section h3 {
+      color: #333;
+      font-size: 1.5rem;
+      margin: 2.5rem 0 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .careers-section ul {
+      margin: 1.5rem 0;
+      padding-left: 2rem;
+    }
+    
+    .careers-section li {
+      margin-bottom: 0.8rem;
+      position: relative;
+    }
+    
+    .careers-section a {
+      color: #FF4B91;
+      text-decoration: none;
+    }
+    
+    .careers-section a:hover {
+      text-decoration: underline;
+    }
+    
+    @media (max-width: 768px) {
+      .careers-section {
+        margin-top: 80px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="main-nav">
+    <div class="logo"><h1>FindYourMatch</h1></div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="safety.html">Safety</a>
+      <a href="support.html">Support</a>
+      <a href="careers.html" class="active">Careers</a>
+    </div>
+    <div class="auth-buttons">
+      <a href="login.html" class="btn btn-outline">Log In</a>
+      <a href="register.html" class="btn btn-primary">Sign Up</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="careers-section">
+      <h2>Careers at FindYourMatch 💼</h2>
+      <p>We're building something meaningful — and we're just getting started.</p>
+
+      <h3>Who We're Looking For</h3>
+      <ul>
+        <li>🌐 Frontend Developers (React/HTML/CSS)</li>
+        <li>⚙️ Backend Developers (Python/Flask/SQL)</li>
+        <li>🎨 UI/UX Designers</li>
+        <li>📢 Community Managers</li>
+        <li>🧠 Data Analysts (Match & Recommendation Engines)</li>
+      </ul>
+
+      <h3>Why Join Us?</h3>
+      <ul>
+        <li>💖 Work on a product that helps people build real relationships</li>
+        <li>🏡 Flexible & remote-friendly work environment</li>
+        <li>🚀 Get in early — shape the future of online dating</li>
+        <li>📈 Opportunities for growth and leadership</li>
+        <li>🌍 Make a real impact on how people connect</li>
+      </ul>
+
+      <h3>Our Culture</h3>
+      <p>At FindYourMatch, we value:</p>
+      <ul>
+        <li>✅ <strong>Inclusivity</strong> - We celebrate diversity in all its forms</li>
+        <li>🚀 <strong>Innovation</strong> - We're not afraid to challenge the status quo</li>
+        <li>🤝 <strong>Transparency</strong> - Open communication is key to our success</li>
+        <li>💡 <strong>Learning</strong> - We grow together as a team</li>
+      </ul>
+
+      <h2>Open Positions</h2>
+      <p>Check out our current job openings below. Don't see your dream role? We're always interested in meeting talented people. Get in touch!</p>
+      
+      <div id="job-listings" class="job-listings">
+        <!-- Jobs will be loaded here from jobs.json -->
+      </div>
+      
+      <div class="apply-form">
+        <h3>Apply Now</h3>
+        <p>Ready to join our team? Fill out the form below to submit your application.</p>
+        
+        <form id="apply-form" class="apply-form" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="position">Position</label>
+            <select id="position" name="position" class="form-control" required>
+              <option value="">Select a position</option>
+              <option value="Frontend Developer">Frontend Developer</option>
+              <option value="Backend Developer">Backend Developer</option>
+              <option value="UI/UX Designer">UI/UX Designer</option>
+              <option value="Content Moderator">Content Moderator</option>
+              <option value="Community Manager">Community Manager</option>
+              <option value="Other">Other (please specify)</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="resume">Resume (PDF, DOC, DOCX, max 5MB)</label>
+            <input type="file" id="resume" name="resume" class="form-control" accept=".pdf,.doc,.docx" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Cover Letter (optional)</label>
+            <textarea id="message" name="message" class="form-control" rows="4" placeholder="Tell us why you'd be a great fit for this role..."></textarea>
+          </div>
+          
+          <button type="submit" class="btn-apply">
+            <i class="fas fa-paper-plane"></i> Submit Application
+          </button>
+        </form>
+      </div>
+      
+      <div class="internship-section">
+        <h2>🚀 Internship Program</h2>
+        <p>Are you a student or recent graduate looking to kickstart your career? Our internship program offers hands-on experience and mentorship in a fast-paced startup environment.</p>
+        
+        <h3>Available Internships</h3>
+        <div class="internship-role">
+          <i class="fas fa-laptop-code"></i>
+          <div>
+            <h4>Software Development Intern</h4>
+            <p>Work on real projects and learn from experienced engineers</p>
+          </div>
+        </div>
+        
+        <div class="internship-role">
+          <i class="fas fa-paint-brush"></i>
+          <div>
+            <h4>UI/UX Design Intern</h4>
+            <p>Help design beautiful, user-friendly interfaces</p>
+          </div>
+        </div>
+        
+        <div class="internship-role">
+          <i class="fas fa-bullhorn"></i>
+          <div>
+            <h4>Marketing Intern</h4>
+            <p>Learn digital marketing and growth strategies</p>
+          </div>
+        </div>
+        
+        <p style="margin-top: 20px;">To apply for an internship, please email your resume and portfolio to <a href="mailto:interns@findyourmatch.com">interns@findyourmatch.com</a> with the subject line "[Internship Application] [Your Name] - [Position]".</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>FindYourMatch</h3>
+        <p>Building meaningful connections through innovative technology.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="safety.html">Safety</a></li>
+          <li><a href="support.html">Help Center</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 FindYourMatch. All rights reserved.</p>
+    </div>
+  </footer>
+  <script>
+    // Load job listings from JSON
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('jobs.json')
+        .then(res => res.json())
+        .then(jobs => {
+          const container = document.getElementById('job-listings');
+          container.innerHTML = jobs.map(job => `
+            <div class="job-card">
+              <h4>${job.title}</h4>
+              <div class="job-meta">
+                <span><i class="fas fa-briefcase"></i> ${job.type}</span>
+                <span><i class="fas fa-map-marker-alt"></i> ${job.location}</span>
+              </div>
+              <p>${job.description}</p>
+            </div>
+          `).join('');
+        })
+        .catch(error => {
+          console.error('Error loading job listings:', error);
+          document.getElementById('job-listings').innerHTML = 
+            '<p>Unable to load job listings at this time. Please check back later or email us at careers@findyourmatch.com</p>';
+        });
+
+      // Handle application form submission
+      const applyForm = document.getElementById('apply-form');
+      if (applyForm) {
+        applyForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          
+          const formData = new FormData(applyForm);
+          const submitBtn = applyForm.querySelector('button[type="submit"]');
+          const originalBtnText = submitBtn.innerHTML;
+          
+          try {
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            
+            const response = await fetch('/api/careers/apply', {
+              method: 'POST',
+              body: formData
+            });
+            
+            const result = await response.json();
+            
+            if (response.ok) {
+              alert('Thank you for your application! We will review your information and get back to you soon.');
+              applyForm.reset();
+            } else {
+              throw new Error(result.message || 'Failed to submit application');
+            }
+          } catch (error) {
+            console.error('Error submitting application:', error);
+            alert(`Error: ${error.message || 'Failed to submit application. Please try again later.'}`);
+          } finally {
+            // Re-enable button
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "fullName": "Nom complet",
+  "email": "E-mail",
+  "password": "Mot de passe",
+  "confirmPassword": "Confirmer le mot de passe",
+  "enterFullName": "Entrez votre nom complet",
+  "enterEmail": "Entrez votre e-mail",
+  "enterPassword": "Entrez votre mot de passe",
+  "passwordRequirements": "Le mot de passe doit contenir au moins 8 caractères",
+  "signup": "S'inscrire",
+  "login": "Se connecter",
+  "settings": "Paramètres",
+  "language": "Langue",
+  "theme": "Thème",
+  "dark": "Sombre",
+  "light": "Clair",
+  "save": "Enregistrer",
+  "push_notifications": "Notifications",
+  "hide_profile": "Masquer mon profil",
+  "two_fa": "Authentification à deux facteurs",
+  "blocked_users": "Utilisateurs bloqués"
+} 

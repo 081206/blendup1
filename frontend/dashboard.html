@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Blendup</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            min-height: 100vh;
+            background: #f4f6f8;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #111827;
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        .sidebar-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: #9ca3af;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .nav-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .welcome-section {
+            margin-bottom: 2rem;
+        }
+
+        .welcome-section h1 {
+            margin: 0;
+            font-size: 1.75rem;
+            color: #111827;
+        }
+
+        .welcome-section p {
+            margin: 0.5rem 0 0;
+            color: #6b7280;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .stat-title {
+            font-size: 0.875rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin: 0;
+        }
+
+        .stat-change {
+            font-size: 0.875rem;
+            color: #059669;
+            margin-top: 0.5rem;
+        }
+
+        .stat-change.negative {
+            color: #dc2626;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .action-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .action-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .action-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: #f3f4f6;
+            color: #111827;
+        }
+
+        .action-content h3 {
+            margin: 0;
+            font-size: 1rem;
+            color: #111827;
+        }
+
+        .action-content p {
+            margin: 0.25rem 0 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .language-switcher select {
+            padding: 0.5rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            color: #374151;
+            background: white;
+        }
+
+        .logout-btn {
+            background: none;
+            border: 1px solid #dc2626;
+            color: #dc2626;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 80px;
+                padding: 1rem;
+            }
+
+            .sidebar-header h2,
+            .nav-item span {
+                display: none;
+            }
+
+            .nav-item {
+                justify-content: center;
+                padding: 0.75rem;
+            }
+
+            .nav-item i {
+                margin: 0;
+            }
+
+            .main-content {
+                margin-left: 80px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                padding: 1rem;
+                flex-direction: row;
+                justify-content: space-around;
+            }
+
+            .sidebar-header {
+                display: none;
+            }
+
+            .nav-item {
+                flex-direction: column;
+                padding: 0.5rem;
+                font-size: 0.75rem;
+            }
+
+            .nav-item i {
+                font-size: 1.25rem;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="images/logo.png" alt="Blendup Logo">
+            <h2>Blendup</h2>
+        </div>
+        <a href="profile.html" class="nav-item">
+            <i class="fas fa-user"></i>
+            <span data-i18n="nav.profile">Profile</span>
+        </a>
+        <a href="profile-setup.html" class="nav-item">
+            <i class="fas fa-edit"></i>
+            <span data-i18n="nav.edit_profile">Edit Profile</span>
+        </a>
+        <a href="feed.html" class="nav-item">
+            <i class="fas fa-th-list"></i>
+            <span data-i18n="nav.posts">Posts</span>
+        </a>
+        <a href="matches.html" class="nav-item">
+            <i class="fas fa-heart"></i>
+            <span data-i18n="nav.matches">Matches</span>
+        </a>
+        <a href="messages.html" class="nav-item">
+            <i class="fas fa-comments"></i>
+            <span data-i18n="nav.messages">Messages</span>
+        </a>
+        <a href="settings.html" class="nav-item">
+            <i class="fas fa-cog"></i>
+            <span data-i18n="nav.settings">Settings</span>
+        </a>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <div class="topbar">
+            <div class="language-switcher">
+                <select id="languageSelect" onchange="changeLanguage(this.value)">
+                    <option value="en">English</option>
+                    <option value="fr">Français</option>
+                    <option value="es">Español</option>
+                    <option value="hi">हिंदी</option>
+                </select>
+            </div>
+            <button class="logout-btn" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+                <span data-i18n="nav.logout">Logout</span>
+            </button>
+        </div>
+
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+            <h1 data-i18n="dashboard.welcome">Welcome back, <span id="userName">User</span> 👋</h1>
+            <p data-i18n="dashboard.subtitle">Here's what's happening with your account today.</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title" data-i18n="dashboard.stats.matches">Total Matches</span>
+                    <div class="stat-icon" style="background: #e0f2fe; color: #0284c7;">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+                <p class="stat-value" id="matchesCount">0</p>
+                <p class="stat-change" id="matchesChange">+12% from last week</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title" data-i18n="dashboard.stats.messages">New Messages</span>
+                    <div class="stat-icon" style="background: #f0fdf4; color: #16a34a;">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                </div>
+                <p class="stat-value" id="messagesCount">0</p>
+                <p class="stat-change" id="messagesChange">+5% from last week</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title" data-i18n="dashboard.stats.views">Profile Views</span>
+                    <div class="stat-icon" style="background: #fef3c7; color: #d97706;">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                </div>
+                <p class="stat-value" id="viewsCount">0</p>
+                <p class="stat-change" id="viewsChange">+8% from last week</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title" data-i18n="dashboard.stats.likes">Total Likes</span>
+                    <div class="stat-icon" style="background: #fce7f3; color: #db2777;">
+                        <i class="fas fa-thumbs-up"></i>
+                    </div>
+                </div>
+                <p class="stat-value" id="likesCount">0</p>
+                <p class="stat-change" id="likesChange">+15% from last week</p>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <a href="profile.html" class="action-card">
+                <div class="action-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="action-content">
+                    <h3 data-i18n="dashboard.actions.profile">View Profile</h3>
+                    <p data-i18n="dashboard.actions.profile_desc">Check your public profile</p>
+                </div>
+            </a>
+            <a href="matches.html" class="action-card">
+                <div class="action-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="action-content">
+                    <h3 data-i18n="dashboard.actions.matches">View Matches</h3>
+                    <p data-i18n="dashboard.actions.matches_desc">See your potential matches</p>
+                </div>
+            </a>
+            <a href="messages.html" class="action-card">
+                <div class="action-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <div class="action-content">
+                    <h3 data-i18n="dashboard.actions.messages">Messages</h3>
+                    <p data-i18n="dashboard.actions.messages_desc">Check your conversations</p>
+                </div>
+            </a>
+            <a href="settings.html" class="action-card">
+                <div class="action-icon">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <div class="action-content">
+                    <h3 data-i18n="dashboard.actions.settings">Settings</h3>
+                    <p data-i18n="dashboard.actions.settings_desc">Manage your preferences</p>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <script src="js/i18n.js"></script>
+    <script>
+        // Check authentication
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Initialize language
+            const savedLang = localStorage.getItem('language') || 'en';
+            document.getElementById('languageSelect').value = savedLang;
+            i18n.changeLanguage(savedLang);
+
+            // Load user data and stats
+            loadUserData();
+            loadDashboardStats();
+        });
+
+        // Load User Data
+        async function loadUserData() {
+            try {
+                const response = await fetch('http://localhost:5000/api/user/profile', {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('userName').textContent = data.name;
+                }
+            } catch (error) {
+                console.error('Error loading user data:', error);
+            }
+        }
+
+        // Load Dashboard Stats
+        async function loadDashboardStats() {
+            try {
+                const response = await fetch('http://localhost:5000/api/user/stats', {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Update stats
+                    document.getElementById('matchesCount').textContent = data.matches || 0;
+                    document.getElementById('messagesCount').textContent = data.messages || 0;
+                    document.getElementById('viewsCount').textContent = data.views || 0;
+                    document.getElementById('likesCount').textContent = data.likes || 0;
+
+                    // Update changes
+                    updateStatChange('matchesChange', data.matches_change);
+                    updateStatChange('messagesChange', data.messages_change);
+                    updateStatChange('viewsChange', data.views_change);
+                    updateStatChange('likesChange', data.likes_change);
+                }
+            } catch (error) {
+                console.error('Error loading dashboard stats:', error);
+            }
+        }
+
+        // Update Stat Change
+        function updateStatChange(elementId, change) {
+            const element = document.getElementById(elementId);
+            if (change > 0) {
+                element.textContent = `+${change}% from last week`;
+                element.className = 'stat-change';
+            } else if (change < 0) {
+                element.textContent = `${change}% from last week`;
+                element.className = 'stat-change negative';
+            } else {
+                element.textContent = 'No change from last week';
+                element.className = 'stat-change';
+            }
+        }
+
+        // Logout Function
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = 'login.html';
+        }
+
+        // Language Switcher
+        function changeLanguage(lang) {
+            localStorage.setItem('language', lang);
+            i18n.changeLanguage(lang).then(() => {
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    el.textContent = i18n.t(key);
+                });
+            });
+        }
+    </script>
+</body>
+</html> 

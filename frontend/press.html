@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Press - FindYourMatch</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .press-section {
+            max-width: 1200px;
+            margin: 80px auto 50px;
+            padding: 0 20px;
+            color: #333;
+            line-height: 1.8;
+        }
+        
+        .press-section h2 {
+            color: #FF4B91;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .press-section h3 {
+            color: #333;
+            font-size: 1.8rem;
+            margin: 2.5rem 0 1.2rem;
+            border-bottom: 2px solid #FF4B91;
+            padding-bottom: 0.5rem;
+        }
+        
+        .press-section p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .press-section ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+        
+        .press-section li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .press-section li:before {
+            content: "•";
+            color: #FF4B91;
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+        
+        .press-section a {
+            color: #FF4B91;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .press-section a:hover {
+            text-decoration: underline;
+        }
+        
+        .press-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        
+        .stat-item {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #FF4B91;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: #666;
+        }
+        
+        .press-kit-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .press-kit-card h3 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .press-kit-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+        
+        .press-kit-card li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        .press-kit-card li:before {
+            content: "✓";
+            color: #FF4B91;
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: #FF4B91;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s ease;
+            text-align: center;
+            width: 100%;
+            max-width: 300px;
+            margin: 1.5rem auto;
+        }
+        
+        .download-btn:hover {
+            background: #e0417d;
+        }
+        
+        .contact-section {
+            background: linear-gradient(135deg, #FF4B91 0%, #FF69B4 100%);
+            padding: 3rem 2rem;
+            border-radius: 10px;
+            margin: 3rem 0;
+            color: white;
+        }
+        
+        .contact-section h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid white;
+        }
+        
+        .contact-section a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .contact-section a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .press-section {
+                margin-top: 60px;
+            }
+            
+            .press-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-item {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<style>
+    .press-release {
+        background: #fff;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin: 2rem 0;
+    }
+    
+    .press-release h4 {
+        color: #333;
+        margin-bottom: 1rem;
+    }
+    
+    .press-release p {
+        margin: 1rem 0;
+        color: #666;
+    }
+    
+    .press-carousel {
+        display: flex;
+        gap: 2rem;
+        overflow-x: auto;
+        padding: 1rem 0;
+        scroll-snap-type: x mandatory;
+        margin: 2rem 0;
+    }
+    
+    .press-logo {
+        flex: 0 0 auto;
+        scroll-snap-align: center;
+        width: 150px;
+        height: auto;
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+    }
+    
+    .press-logo:hover {
+        opacity: 1;
+    }
+    
+    .press-logo img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+    
+    .media-form {
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .media-form input,
+    .media-form textarea {
+        width: 100%;
+        padding: 1rem;
+        margin: 1rem 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+    
+    .media-form textarea {
+        height: 150px;
+        resize: vertical;
+    }
+    
+    .media-form button {
+        width: 100%;
+        padding: 1rem;
+        background: #FF4B91;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+    
+    .media-form button:hover {
+        background: #e0417d;
+    }
+</style>
+<body>
+  <nav class="main-nav">
+    <div class="logo">
+      <h1>FindYourMatch</h1>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="careers.html">Careers</a>
+      <a href="press.html" class="active">Press</a>
+    </div>
+    <div class="auth-buttons" id="auth-buttons">
+      <button class="btn-secondary" id="login-btn-nav">Log in</button>
+      <button class="btn-primary" id="signup-btn-nav">Sign up</button>
+    </div>
+    <div class="profile-nav" id="profile-nav" style="display: none;">
+      <a href="profile.html" class="profile-link">
+        <i class="fas fa-user"></i>
+        <span>My Profile</span>
+      </a>
+      <button class="btn-secondary" id="logout-btn">Logout</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="press-section">
+      <h2>Press & Media - FindYourMatch</h2>
+      
+      <div class="press-intro">
+        <p><strong>FindYourMatch</strong> is a modern dating app that puts safety, authenticity, and real connection at the heart of the experience. We're focused on helping people meet genuinely—no gimmicks, no games.</p>
+      </div>
+
+      <h3>Quick Facts</h3>
+      <ul>
+        <li>📍 Launched: 2025</li>
+        <li>🌍 Available in: India, expanding globally</li>
+        <li>📱 Platforms: Web, Android (iOS coming soon)</li>
+        <li>👥 Users: Growing rapidly (over 5,000 users in beta!)</li>
+        <li>🎯 Focus: Safety, authenticity, and meaningful connections</li>
+      </ul>
+
+      <h3>Our Story</h3>
+      <p>FindYourMatch began as a passion project by a group of friends who were tired of dating apps that felt more like games than relationship tools. We decided to build a platform focused on honesty, safety, and human-first features.</p>
+      <p>Our mission is to create a dating experience where people can be their true selves, where safety is a priority, and where real connections can flourish. We believe that technology should enhance human relationships, not complicate them.</p>
+
+      <div class="press-stats">
+        <div class="stat-item">
+          <div class="stat-number">5,000+</div>
+          <div class="stat-label">Users in beta</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">100+</div>
+          <div class="stat-label">Reviews on Google Play</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4.5/5</div>
+          <div class="stat-label">Average rating on Google Play</div>
+        </div>
+      </div>
+
+      <div class="press-kit-card">
+        <h3>Download Our Press Kit</h3>
+        <ul>
+          <li>Brand assets (logos, color palette, typography)</li>
+          <li>App screenshots and mockups</li>
+          <li>Team photos and bios</li>
+          <li>Company overview document</li>
+          <li>Press release templates</li>
+        </ul>
+        <a href="assets/presskit.zip" class="download-btn">Download Press Kit (ZIP)</a>
+      </div>
+
+      <h3>Latest Press Release</h3>
+      <article class="press-release">
+        <h4>FindYourMatch Launches to Redefine Safe and Genuine Online Dating</h4>
+        <p><strong>May 15, 2025 – Remote, Worldwide</strong></p>
+        <p>FindYourMatch, a next-generation dating app, officially launches to help people build authentic relationships with a safety-first approach. With features like verified profiles, block/report tools, and interest-based matching, FindYourMatch is redefining how people meet online.</p>
+        <p>"We wanted to create a space where people feel safe being themselves," says the FindYourMatch team. "Unlike traditional dating apps that focus on speed or swiping, we prioritize real connections and safety."</p>
+        <p>The app is currently available on the web and Android, with an iOS version coming soon.</p>
+        <p><strong>Contact:</strong> <a href="mailto:press@findyourmatch.com">press@findyourmatch.com</a></p>
+      </article>
+
+      <h3>As Featured In</h3>
+      <div class="press-carousel">
+        <div class="press-logo">
+          <img src="assets/logos/techcrunch.png" alt="TechCrunch">
+        </div>
+        <div class="press-logo">
+          <img src="assets/logos/mashable.png" alt="Mashable">
+        </div>
+        <div class="press-logo">
+          <img src="assets/logos/ndtv.png" alt="NDTV">
+        </div>
+        <div class="press-logo">
+          <img src="assets/logos/indiatoday.png" alt="India Today">
+        </div>
+      </div>
+
+      <h3>Media Inquiries</h3>
+      <form id="media-form" class="media-form">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your message or request..." rows="4" required></textarea>
+        <button type="submit" class="btn-primary">Send Inquiry</button>
+      </form>
+
+      <script>
+        document.getElementById('media-form').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          alert("Thanks! Your inquiry has been submitted. Our team will get back to you soon.");
+          e.target.reset();
+        });
+      </script>
+
+      <h3>Contact</h3>
+      <div class="contact-section">
+        <h3>Get in touch with us</h3>
+        <p>For media or press inquiries, email us at <a href="mailto:press@findyourmatch.com">press@findyourmatch.com</a></p>
+        <p>For urgent inquiries, call us at <a href="tel:+911234567890">+91 1234567890</a></p>
+        <p>Based in: Bangalore, India</p>
+      </div>
+
+      <h3>Recent News</h3>
+      <div class="news-items">
+        <div class="news-item">
+          <h4>FindYourMatch Launches in India</h4>
+          <p>May 2025 - FindYourMatch launches its beta version in India, focusing on creating a safer dating experience.</p>
+        </div>
+        <div class="news-item">
+          <h4>5,000 Users in First Month</h4>
+          <p>June 2025 - FindYourMatch reaches 5,000 active users in its first month of beta testing.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="press.html">Press</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="safety.html">Safety</a></li>
+          <li><a href="support.html">Help Center</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 FindYourMatch. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: blendup-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: blendup-db
+          property: connectionString
+      - key: FLASK_ENV
+        value: production
+      - key: UPLOAD_FOLDER
+        value: uploads
+    healthCheckPath: /api/health
+    autoDeploy: true 

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Blendup</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <script src="js/auth.js"></script>
+    <script>
+        // Check authentication
+        checkAuth();
+    </script>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="logo">
+            <h1>Blendup</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="feed.html">Feed</a>
+            <a href="profile.html">My Profile</a>
+            <a href="matches.html">Matches</a>
+            <a href="messages.html" class="active">Messages</a>
+            <a href="settings.html">Settings</a>
+        </div>
+        <div class="profile-nav">
+            <button id="logout-btn" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="messages-container">
+        <div class="messages-sidebar">
+            <div class="search-conversations">
+                <input type="text" id="search-conversations" placeholder="Search conversations...">
+            </div>
+            <div class="conversations-list" id="conversations-list">
+                <!-- Conversations will be loaded here -->
+                <div class="loading-conversations">
+                    <i class="fas fa-spinner fa-spin"></i> Loading conversations...
+                </div>
+            </div>
+        </div>
+        <div class="messages-content">
+            <div class="messages-header">
+                <h2 id="current-chat-name">Select a conversation</h2>
+            </div>
+            <div class="messages-area" id="messages-area">
+                <!-- Messages will be loaded here -->
+                <div class="no-conversation-selected">
+                    <i class="fas fa-comments"></i>
+                    <p>Select a conversation to start messaging</p>
+                </div>
+            </div>
+            <div class="message-input">
+                <input type="text" id="message-text" placeholder="Type your message...">
+                <button id="send-message" class="btn-primary">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+    <script src="js/messages.js"></script>
+</body>
+</html> 

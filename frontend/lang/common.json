@@ -1,0 +1,22 @@
+{
+  "fullName": "Full Name",
+  "email": "Email",
+  "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "enterFullName": "Enter your full name",
+  "enterEmail": "Enter your email",
+  "enterPassword": "Enter your password",
+  "passwordRequirements": "Password must be at least 8 characters long",
+  "signup": "Sign Up",
+  "login": "Log In",
+  "settings": "Settings",
+  "language": "Language",
+  "theme": "Theme",
+  "dark": "Dark",
+  "light": "Light",
+  "save": "Save",
+  "push_notifications": "Notifications",
+  "hide_profile": "Hide my profile",
+  "two_fa": "Two-factor authentication",
+  "blocked_users": "Blocked users"
+} 

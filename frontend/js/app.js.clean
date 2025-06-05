@@ -1,0 +1,12 @@
+// Your JavaScript code here...
+
+// Initialize the app when DOM is fully loaded
+function initializeApp() {
+    // Your initialization code here...
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeApp);
+} else {
+    initializeApp();
+}

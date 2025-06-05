@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Guidelines - Blendup</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="logo">
+            <h1>Blendup</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="safety.html">Safety</a>
+            <a href="support.html">Support</a>
+            <a href="feed.html">Feed</a>
+            <a href="about.html">About Us</a>
+            <a href="community.html" class="active">Community Guidelines</a>
+        </div>
+        <div class="auth-buttons" id="auth-buttons">
+            <button class="btn-secondary" id="login-btn-nav">Log in</button>
+            <button class="btn-primary" id="signup-btn-nav">Sign up</button>
+        </div>
+        <div class="profile-nav" id="profile-nav" style="display: none;">
+            <a href="profile.html" class="profile-link">
+                <i class="fas fa-user"></i>
+                <span>My Profile</span>
+            </a>
+            <button class="btn-secondary" id="logout-btn">Logout</button>
+        </div>
+    </nav>
+
+    <!-- Community Guidelines Section -->
+    <main class="container">
+        <section class="community-section">
+            <h2>Community Guidelines</h2>
+            <p>We want Blendup to be a respectful, kind, and safe space for everyone. These guidelines help ensure a positive experience for all users.</p>
+
+            <div class="guidelines-container">
+                <div class="guideline-card">
+                    <h3>Be Respectful</h3>
+                    <p>No bullying, hate speech, or harassment. Treat everyone with kindness — even if it's not a match.</p>
+                </div>
+
+                <div class="guideline-card">
+                    <h3>Keep It Real</h3>
+                    <p>No fake profiles, bots, or impersonating others. Be authentic and honest about who you are.</p>
+                </div>
+
+                <div class="guideline-card">
+                    <h3>Stay Safe</h3>
+                    <p>Never share personal, financial, or sensitive info. Report anyone who makes you feel uncomfortable.</p>
+                </div>
+
+                <div class="guideline-card">
+                    <h3>No Inappropriate Content</h3>
+                    <p>No nudity, violence, illegal activity, or anything that could offend or harm others.</p>
+                </div>
+
+                <div class="guideline-card">
+                    <h3>Respect Boundaries</h3>
+                    <p>If someone doesn't respond or declines a match, respect their choice. No spam or repeated messaging.</p>
+                </div>
+
+                <div class="guideline-card">
+                    <h3>Report Violations</h3>
+                    <p>Help keep Blendup safe. Use the report button or email support to report issues.</p>
+                </div>
+            </div>
+
+            <section class="report-section">
+                <h3>Report a Violation</h3>
+                <form id="report-form" class="report-form">
+                    <div class="form-group">
+                        <label for="reason">Reason</label>
+                        <select name="reason" id="reason" required>
+                            <option value="">Select a reason</option>
+                            <option value="Harassment">Harassment</option>
+                            <option value="Inappropriate Content">Inappropriate Content</option>
+                            <option value="Fake Profile">Fake Profile</option>
+                            <option value="Spam">Spam</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="details">Details</label>
+                        <textarea name="details" id="details" placeholder="Describe what happened..." rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Submit Report</button>
+                </form>
+            </section>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Company</h4>
+                <a href="about.html">About Us</a>
+                <a href="careers.html">Careers</a>
+                <a href="press.html">Press</a>
+            </div>
+            <div class="footer-section">
+                <h4>Support</h4>
+                <a href="support.html">Help Center</a>
+                <a href="safety.html">Safety Tips</a>
+                <a href="#">Community Guidelines</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Cookie Policy</a>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Blendup. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script>
+        document.getElementById('report-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = {
+                reason: formData.get('reason'),
+                details: formData.get('details'),
+            };
+
+            try {
+                const token = localStorage.getItem('token');
+                const res = await fetch('http://localhost:5001/api/report', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...(token ? { Authorization: 'Bearer ' + token } : {})
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await res.json();
+                alert(result.message);
+                this.reset();
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while submitting the report. Please try again later.');
+            }
+        });
+
+        // Check for warnings when page loads
+        async function checkWarnings() {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) return;
+
+                const res = await fetch('http://localhost:5001/api/user/warnings', {
+                    headers: {
+                        Authorization: 'Bearer ' + token
+                    }
+                });
+
+                const result = await res.json();
+                if (result.warning) {
+                    alert(result.warning);
+                }
+            } catch (error) {
+                console.error('Error checking warnings:', error);
+            }
+        }
+
+        // Check warnings when page loads
+        checkWarnings();
+    </script>
+</body>
+</html>

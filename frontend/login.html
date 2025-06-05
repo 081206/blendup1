@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="login">Login - Blendup</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #fff5f8 0%, #fff 100%);
+        }
+
+        .auth-form {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(255, 75, 145, 0.15),
+                       0 10px 20px rgba(0, 0, 0, 0.2),
+                       0 0 0 1px rgba(255, 75, 145, 0.1);
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            background: linear-gradient(to bottom right, #ffffff, #fff5f8);
+        }
+
+        .auth-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            box-shadow: inset 0 0 20px rgba(255, 75, 145, 0.1);
+            pointer-events: none;
+        }
+
+        .auth-form h1 {
+            text-align: center;
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .auth-form .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #FF4B91;
+            box-shadow: 0 0 0 3px rgba(255, 75, 145, 0.1);
+            outline: none;
+            background: white;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            background: #FF4B91;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary:hover {
+            background: #e03e7f;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .form-footer a {
+            color: #FF4B91;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-loader {
+            display: none;
+            width: 16px;
+            height: 16px;
+            border: 2px solid white;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: opacity 0.3s ease;
+        }
+
+        .notification.success {
+            background: #28a745;
+        }
+
+        .notification.error {
+            background: #dc3545;
+        }
+
+        .hidden {
+            display: none;
+            opacity: 0;
+        }
+
+        /* Mobile Navigation */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            padding: 10px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .auth-form {
+                padding: 25px 20px;
+                margin: 10px;
+                box-shadow: 0 10px 25px rgba(255, 75, 145, 0.15),
+                           0 5px 15px rgba(0, 0, 0, 0.15);
+            }
+
+            .auth-form h1 {
+                font-size: 24px;
+            }
+
+            .auth-form .subtitle {
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+
+            .form-group input {
+                font-size: 16px; /* Prevents zoom on iOS */
+                padding: 12px;
+            }
+
+            .btn-primary {
+                padding: 12px;
+                font-size: 16px;
+            }
+
+            .form-footer {
+                font-size: 13px;
+            }
+
+            .mobile-toggle {
+                display: block;
+                position: fixed;
+                top: 15px;
+                right: 15px;
+                z-index: 1000;
+            }
+        }
+
+        /* Small mobile devices */
+        @media (max-width: 480px) {
+            .auth-form {
+                padding: 20px 15px;
+            }
+
+            .auth-form h1 {
+                font-size: 22px;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            .form-group input {
+                padding: 10px;
+            }
+
+            .btn-primary {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="mobile-toggle" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="notification" class="notification hidden"></div>
+
+    <div class="container">
+        <div class="auth-form">
+            <h1 data-i18n="welcomeBack">Welcome Back</h1>
+            <p class="subtitle" data-i18n="loginToAccount">Log in to your Blendup account</p>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email" data-i18n="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" data-i18n="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Enter your password">
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn-primary">
+                        <span class="btn-text" data-i18n="login">Log In</span>
+                        <span class="btn-loader"></span>
+                    </button>
+                </div>
+                
+                <div class="form-footer">
+                    <p data-i18n="dontHaveAccount">Don't have an account? <a href="/signup.html" data-i18n="signup">Sign up</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/i18n.js"></script>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks) {
+                navLinks.classList.toggle('show');
+            }
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.remove('hidden');
+            setTimeout(() => {
+                notification.classList.add('hidden');
+            }, 3000);
+        }
+
+        function updateTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                element.textContent = i18n.t(key);
+            });
+        }
+
+        const savedLanguage = localStorage.getItem('language') || 'en';
+        i18n.changeLanguage(savedLanguage).then(updateTranslations);
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const email = form.email.value;
+            const password = form.password.value;
+            const submitBtn = form.querySelector('button');
+            const btnText = form.querySelector('.btn-text');
+            const btnLoader = form.querySelector('.btn-loader');
+
+            try {
+                submitBtn.disabled = true;
+                btnText.style.opacity = '0.6';
+                btnLoader.style.display = 'inline-block';
+
+                const response = await fetch('http://localhost:5001/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    localStorage.setItem('token', data.token || '');
+                    localStorage.setItem('user', JSON.stringify({
+                        email: data.email || '',
+                        name: data.name || ''
+                    }));
+
+                    showNotification('Login successful!', 'success');
+                    setTimeout(() => {
+                        window.location.href = '/profile.html';
+                    }, 1200);
+                } else {
+                    showNotification(data.message || 'Login failed. Check your credentials.', 'error');
+                }
+            } catch (error) {
+                showNotification('Login error. Please try again.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                btnText.style.opacity = '1';
+                btnLoader.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html> 

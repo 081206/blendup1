@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Support - Blendup</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <nav class="main-nav">
+    <div class="logo">
+      <h1>Blendup</h1>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="feed.html">Feed</a>
+      <a href="profile.html">My Profile</a>
+      <a href="safety.html">Safety</a>
+      <a href="support.html" class="active">Support</a>
+      <a href="about.html">About Us</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="support-section">
+      <h2>How can we help you?</h2>
+      <p class="support-intro">Need help with something? Find answers or contact us directly below.</p>
+
+      <div class="support-grid">
+        <div class="support-card">
+          <i class="fas fa-user-circle"></i>
+          <h3>Account Help</h3>
+          <ul>
+            <li>Login issues</li>
+            <li>Password reset</li>
+            <li>Account deletion</li>
+            <li>Profile settings</li>
+          </ul>
+        </div>
+
+        <div class="support-card">
+          <i class="fas fa-shield-alt"></i>
+          <h3>Safety & Reporting</h3>
+          <ul>
+            <li>Report a user</li>
+            <li>Block users</li>
+            <li>Privacy settings</li>
+            <li>Community guidelines</li>
+          </ul>
+        </div>
+
+        <div class="support-card">
+          <i class="fas fa-comments"></i>
+          <h3>Matches & Messages</h3>
+          <ul>
+            <li>Connection issues</li>
+            <li>Message problems</li>
+            <li>Match suggestions</li>
+            <li>Unmatching</li>
+          </ul>
+        </div>
+
+        <div class="support-card">
+          <i class="fas fa-question-circle"></i>
+          <h3>General Help</h3>
+          <ul>
+            <li>App features</li>
+            <li>Technical issues</li>
+            <li>FAQ</li>
+            <li>App updates</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-section">
+        <h3>Frequently Asked Questions</h3>
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>How do I reset my password?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Go to the login screen and click on "Forgot Password". Enter your email address and we'll send you a link to reset your password.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>How do I report a user?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Visit the user's profile, tap the three dots in the top right corner, and select "Report User". You can also report messages directly from your chat.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>How can I delete my account?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Go to Settings > Account > Delete Account. Please note that this action is permanent and cannot be undone.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-section">
+        <h3>Contact Our Support Team</h3>
+        <form id="support-form" class="support-form">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <select id="subject" name="subject" required>
+              <option value="">Select a topic</option>
+              <option value="account">Account Help</option>
+              <option value="safety">Safety & Reporting</option>
+              <option value="technical">Technical Issues</option>
+              <option value="feedback">Feedback & Suggestions</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="message">How can we help you?</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          
+          <button type="submit" class="btn-primary">Send Message</button>
+        </form>
+        
+        <div class="alternative-contact">
+          <p>Prefer to email us directly?</p>
+          <p><i class="fas fa-envelope"></i> <a href="mailto:support@blendup.com">support@blendup.com</a></p>
+          <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+          <p><i class="fas fa-clock"></i> Support Hours: Monday - Friday, 9 AM - 6 PM EST</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Company</h4>
+        <a href="#">About Us</a>
+        <a href="#">Careers</a>
+        <a href="#">Press</a>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+      <div class="footer-section">
+        <h4>Support</h4>
+        <a href="safety.html">Safety Tips</a>
+        <a href="support.html">Help Center</a>
+        <a href="#">Community Guidelines</a>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Blendup. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/support.js"></script>
+</body>
+</html>

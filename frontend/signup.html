@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="signup">Sign Up - Blendup</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .btn-loader {
+            display: none;
+            width: 16px;
+            height: 16px;
+            border: 2px solid white;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: opacity 0.3s ease;
+        }
+        .notification.success {
+            background: #28a745;
+        }
+        .notification.error {
+            background: #dc3545;
+        }
+        .hidden {
+            display: none;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="notification" class="notification hidden"></div>
+    
+    <nav class="main-nav">
+        <div class="logo">
+            <h1>Blendup</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="feed.html">Feed</a>
+            <a href="profile.html">My Profile</a>
+            <a href="safety.html">Safety</a>
+            <a href="support.html">Support</a>
+            <a href="about.html">About Us</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="auth-section">
+            <div class="auth-container">
+                <h2 data-i18n="createAccount">Create Your Account</h2>
+                <p class="auth-subtitle" data-i18n="joinBlendup">Join Blendup and start connecting with amazing people</p>
+
+                <form id="signup-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="name" data-i18n="fullName">Full Name</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" data-i18n="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="Enter your email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" data-i18n="password">Password</label>
+                        <input type="password" id="password" name="password" required placeholder="Create a password">
+                        <small>Password must be at least 6 characters long</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm-password" data-i18n="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirm-password" required placeholder="Confirm your password">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthDate" data-i18n="birthDate">Birth Date</label>
+                        <input type="date" id="birthDate" name="birthDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender" data-i18n="gender">Gender</label>
+                        <select id="gender" name="gender" required>
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                            <option value="prefer-not-to-say">Prefer not to say</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location" data-i18n="location">Location</label>
+                        <input type="text" id="location" name="location" placeholder="City, Country">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" required>
+                            <span class="checkmark"></span>
+                            I agree to the <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+                        <span class="btn-text" data-i18n="signup">Sign Up</span>
+                        <span class="btn-loader"></span>
+                    </button>
+                </form>
+
+                <div class="form-footer">
+                    <p data-i18n="termsAgreement">By signing up, you agree to our Terms of Service and Privacy Policy</p>
+                    <p data-i18n="alreadyHaveAccount">Already have an account? <a href="login.html" data-i18n="login">Log in</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="/js/i18n.js"></script>
+    <script>
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.remove('hidden');
+            setTimeout(() => {
+                notification.classList.add('hidden');
+            }, 3000);
+        }
+
+        function updateTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                element.textContent = i18n.t(key);
+            });
+        }
+
+        const savedLanguage = localStorage.getItem('language') || 'en';
+        i18n.changeLanguage(savedLanguage).then(() => {
+            updateTranslations();
+        });
+
+        document.getElementById('signup-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const form = e.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoader = submitBtn.querySelector('.btn-loader');
+            
+            const password = form.password.value;
+            const confirmPassword = form['confirm-password'].value;
+            
+            if (password !== confirmPassword) {
+                showNotification('Passwords do not match', 'error');
+                return;
+            }
+            
+            const formData = {
+                name: form.name.value,
+                email: form.email.value,
+                password,
+                birth_date: form.birthDate.value,
+                gender: form.gender.value,
+                location: form.location.value
+            };
+            
+            try {
+                submitBtn.disabled = true;
+                btnText.style.opacity = '0.6';
+                btnLoader.style.display = 'inline-block';
+                
+                const response = await fetch('http://localhost:5001/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    localStorage.setItem('token', data.token || '');
+                    localStorage.setItem('user', JSON.stringify({
+                        id: data.user_id || '',
+                        email: data.email || '',
+                        name: data.name || ''
+                    }));
+                    
+                    showNotification('Account created successfully!', 'success');
+                    setTimeout(() => {
+                        window.location.href = '/profile.html';
+                    }, 1500);
+                } else {
+                    showNotification(data.message || 'Registration failed. Please try different data.', 'error');
+                }
+            } catch (error) {
+                showNotification('Something went wrong: ' + (error.message || 'Unknown error.'), 'error');
+            } finally {
+                submitBtn.disabled = false;
+                btnText.style.opacity = '1';
+                btnLoader.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html> 

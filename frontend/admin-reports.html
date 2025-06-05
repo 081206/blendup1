@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - User Reports</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="logo">
+            <h1>Blendup Admin</h1>
+        </div>
+        <div class="nav-links">
+            <a href="admin-reports.html" class="active">User Reports</a>
+        </div>
+        <div class="auth-buttons" id="auth-buttons">
+            <button class="btn-secondary" id="logout-btn">Logout</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h2>User Reports</h2>
+        <div class="reports-filter">
+            <div class="filter-group">
+                <label for="date-filter">Filter by Date:</label>
+                <input type="date" id="date-filter">
+            </div>
+            <div class="filter-group">
+                <label for="reason-filter">Filter by Reason:</label>
+                <select id="reason-filter">
+                    <option value="">All Reasons</option>
+                    <option value="Harassment">Harassment</option>
+                    <option value="Inappropriate Content">Inappropriate Content</option>
+                    <option value="Fake Profile">Fake Profile</option>
+                    <option value="Spam">Spam</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+        </div>
+        <table id="reports-table" class="reports-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Reporter</th>
+                    <th>Reported</th>
+                    <th>Reason</th>
+                    <th>Details</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </main>
+
+    <script>
+        async function loadReports() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '/login';
+                return;
+            }
+
+            try {
+                const res = await fetch('http://localhost:5001/api/admin/reports', {
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }
+                });
+
+                if (res.status === 403) {
+                    alert('Unauthorized access. Only admin users can view reports.');
+                    window.location.href = '/login';
+                    return;
+                }
+
+                const reports = await res.json();
+                const tbody = document.querySelector('#reports-table tbody');
+                tbody.innerHTML = reports.map(r => `
+                    <tr>
+                        <td>${r.id}</td>
+                        <td>${r.reporter_id ?? 'Anonymous'}</td>
+                        <td>${r.reported_user_id ?? 'N/A'}</td>
+                        <td>${r.reason}</td>
+                        <td>${r.details}</td>
+                        <td>${new Date(r.created_at).toLocaleString()}</td>
+                        <td>
+                            <button class="btn-secondary btn-small" onclick="viewDetails(${r.id})">View</button>
+                            ${r.reported_user_id ? `<button class="btn-danger btn-small" onclick="suspendUser(${r.reported_user_id})">Suspend</button>` : ''}
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading reports:', error);
+                alert('Failed to load reports. Please try again.');
+            }
+        }
+
+        async function viewDetails(reportId) {
+            const token = localStorage.getItem('token');
+            try {
+                const res = await fetch(`http://localhost:5001/api/admin/report/${reportId}`, {
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }
+                });
+                const report = await res.json();
+                alert(`Report Details:\n\nID: ${report.id}\nReporter: ${report.reporter_id ?? 'Anonymous'}\nReason: ${report.reason}\nDetails: ${report.details}\nDate: ${new Date(report.created_at).toLocaleString()}`);
+            } catch (error) {
+                console.error('Error viewing details:', error);
+                alert('Failed to view report details.');
+            }
+        }
+
+        async function suspendUser(userId) {
+            if (!confirm('Are you sure you want to suspend this user?')) return;
+
+            const token = localStorage.getItem('token');
+            try {
+                const res = await fetch(`http://localhost:5001/api/admin/suspend/${userId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }
+                });
+                if (res.ok) {
+                    alert('User suspended successfully.');
+                    loadReports();
+                } else {
+                    alert('Failed to suspend user.');
+                }
+            } catch (error) {
+                console.error('Error suspending user:', error);
+                alert('Failed to suspend user.');
+            }
+        }
+
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            localStorage.removeItem('token');
+            window.location.href = '/login';
+        });
+
+        loadReports();
+    </script>
+</body>
+</html>

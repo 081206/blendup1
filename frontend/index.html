@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blendup - Dating App</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <script>
+        // Check authentication and redirect if logged in
+        const token = localStorage.getItem('token');
+        if (token) {
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="logo">
+            <h1>Blendup</h1>
+        </div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="safety.html">Safety</a>
+            <a href="support.html">Support</a>
+            <a href="feed.html">Feed</a>
+            <a href="about.html">About Us</a>
+        </div>
+        <div class="auth-buttons" id="auth-buttons">
+            <a href="login.html" class="btn-secondary">Log in</a>
+            <a href="signup.html" class="btn-primary">Sign up</a>
+        </div>
+        <div class="profile-nav" id="profile-nav" style="display: none;">
+            <a href="profile.html" class="profile-link">
+                <i class="fas fa-user"></i>
+                <span>My Profile</span>
+            </a>
+            <button class="btn-secondary" id="logout-btn">Logout</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Make the next move</h1>
+            <p class="hero-subtitle">It's better on the app.</p>
+            <div class="cta-buttons">
+                <button class="btn-primary btn-large">
+                    <i class="fab fa-apple"></i>
+                    Download on App Store
+                </button>
+                <button class="btn-primary btn-large">
+                    <i class="fab fa-google-play"></i>
+                    Get it on Google Play
+                </button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="images/hero-image.png" alt="BlendUp App Preview">
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <h2>We're not just for dating</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-heart"></i>
+                <h3>Find Your Match</h3>
+                <p>Find someone you actually want to date, then go ahead and make the first move. Make genuine connections and have fun.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-users"></i>
+                <h3>Make New Friends</h3>
+                <p>Meet someone like you. Or unlike you. Make new friends and find new things to do together—whether you're home or away.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-briefcase"></i>
+                <h3>Career Connections</h3>
+                <p>Find friends with work benefits. Connect with other professionals to find your next job, a mentor or even a whole new career.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Company</h4>
+                <a href="about.html">About Us</a>
+                <a href="careers.html">Careers</a>
+                <a href="press.html">Press</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-section">
+                <h4>Support</h4>
+                <a href="support.html">Help Center</a>
+                <a href="safety.html">Safety Tips</a>
+                <a href="community.html">Community Guidelines</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Cookie Policy</a>
+            </div>
+        </div>
+        <div class="footer-section follow-us">
+            <h4>Follow Us</h4>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Blendup. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html> 

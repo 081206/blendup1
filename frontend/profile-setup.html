@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your Profile - Blendup</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .profile-setup-section {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .profile-picture-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-picture-preview {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .profile-picture-preview:hover {
+            border-color: #007bff;
+        }
+
+        .profile-picture-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .upload-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 8px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .profile-picture-preview:hover .upload-overlay {
+            opacity: 1;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .form-group input[type="text"],
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+        }
+
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .interest-tag {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interest-tag:hover {
+            background: #e9ecef;
+        }
+
+        .interest-tag input[type="checkbox"] {
+            margin-right: 8px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+
+        .btn-loader {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            margin-left: 8px;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .notification.show {
+            opacity: 1;
+        }
+
+        .notification.success {
+            background: #28a745;
+        }
+
+        .notification.error {
+            background: #dc3545;
+        }
+
+        .char-counter {
+            text-align: right;
+            color: #6c757d;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        @media (max-width: 768px) {
+            .profile-setup-section {
+                margin: 1rem;
+                padding: 1rem;
+            }
+
+            .interests-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <script src="js/auth.js"></script>
+    <script>
+        // Check authentication
+        checkAuth();
+    </script>
+    <!-- Notification Container -->
+    <div id="notification" class="notification"></div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">Blendup</a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" data-i18n="nav.home">Home</a>
+                <a href="about.html" data-i18n="nav.about">About</a>
+                <a href="login.html" data-i18n="nav.login">Login</a>
+            </div>
+            <div class="language-switcher">
+                <select id="languageSelect" onchange="changeLanguage(this.value)">
+                    <option value="en">English</option>
+                    <option value="fr">Français</option>
+                    <option value="es">Español</option>
+                    <option value="hi">हिंदी</option>
+                </select>
+            </div>
+            <div class="profile-nav">
+                <button id="logout-btn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Profile Setup Section -->
+    <section class="profile-setup-section">
+        <div class="profile-setup-container">
+            <h1 data-i18n="profile.setup.title">Complete Your Profile</h1>
+            <p class="subtitle" data-i18n="profile.setup.subtitle">Tell us more about yourself to help us find your perfect matches.</p>
+
+            <form id="profile-setup-form" class="profile-setup-form">
+                <div class="form-section">
+                    <h2>Basic Information</h2>
+                    <div class="form-group">
+                        <label for="full-name">Full Name</label>
+                        <input type="text" id="full-name" name="full-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bio">Bio</label>
+                        <textarea id="bio" name="bio" rows="4" placeholder="Tell us about yourself..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="birthdate">Birthdate</label>
+                        <input type="date" id="birthdate" name="birthdate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender" required>
+                            <option value="">Select gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Interests</h2>
+                    <div class="interests-grid">
+                        <label class="interest-item">
+                            <input type="checkbox" name="interests" value="music">
+                            <span>Music</span>
+                        </label>
+                        <label class="interest-item">
+                            <input type="checkbox" name="interests" value="sports">
+                            <span>Sports</span>
+                        </label>
+                        <label class="interest-item">
+                            <input type="checkbox" name="interests" value="travel">
+                            <span>Travel</span>
+                        </label>
+                        <label class="interest-item">
+                            <input type="checkbox" name="interests" value="food">
+                            <span>Food</span>
+                        </label>
+                        <label class="interest-item">
+                            <input type="checkbox" name="interests" value="movies">
+                            <span>Movies</span>
+                        </label>
+                        <label class="interest-item">
+                            <input type="checkbox" name="interests" value="books">
+                            <span>Books</span>
+                        </label>
+                        <label class="interest-item">
+                            <input type="checkbox" name="interests" value="art">
+                            <span>Art</span>
+                        </label>
+                        <label class="interest-item">
+                            <input type="checkbox" name="interests" value="technology">
+                            <span>Technology</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Profile Picture</h2>
+                    <div class="profile-picture-upload">
+                        <div class="upload-preview">
+                            <img id="profile-preview" src="images/default-avatar.png" alt="Profile Preview">
+                        </div>
+                        <div class="upload-actions">
+                            <label for="profile-picture" class="btn-secondary">
+                                <i class="fas fa-camera"></i> Choose Photo
+                            </label>
+                            <input type="file" id="profile-picture" name="profile-picture" accept="image/*" hidden>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Complete Profile</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-i18n="footer.about">About Blendup</h3>
+                <p data-i18n="footer.description">Connect with people who share your interests and passions.</p>
+            </div>
+            <div class="footer-section">
+                <h3 data-i18n="footer.follow">Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Blendup. <span data-i18n="footer.rights">All rights reserved.</span></p>
+        </div>
+    </footer>
+
+    <script src="js/i18n.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/profile-setup.js"></script>
+</body>
+</html> 

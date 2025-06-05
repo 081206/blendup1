@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Frontend Developer",
+    "type": "Full-Time",
+    "location": "Remote",
+    "description": "Work with React and modern JavaScript to build our user experience. You'll collaborate with designers and backend developers to create seamless, responsive interfaces."
+  },
+  {
+    "title": "Backend Developer",
+    "type": "Full-Time",
+    "location": "Remote",
+    "description": "Build and maintain our Python/Flask backend services. Experience with databases, APIs, and cloud infrastructure is a plus."
+  },
+  {
+    "title": "UI/UX Designer",
+    "type": "Full-Time",
+    "location": "Remote",
+    "description": "Design beautiful, intuitive interfaces for our dating platform. You'll work closely with the product and engineering teams to create delightful user experiences."
+  },
+  {
+    "title": "Content Moderator",
+    "type": "Part-Time",
+    "location": "Anywhere",
+    "description": "Help keep Blendup safe and friendly by reviewing user-generated content and ensuring our community guidelines are followed."
+  },
+  {
+    "title": "Community Manager",
+    "type": "Full-Time",
+    "location": "Remote",
+    "description": "Engage with our community, moderate discussions, and help create a positive environment for our users."
+  }
+]
